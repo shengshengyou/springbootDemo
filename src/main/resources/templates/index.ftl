@@ -1,0 +1,18 @@
+<html>
+<head>
+<script type="text/javascript" src="/js/jquery-2.0.0.min.js"></script>
+</head>
+
+<body>
+hello freemarker<br>
+data:${str}<br>
+
+<button id="btn">按钮</button>
+<script type="text/javascript">
+	$("#btn").click(function(){
+		alert("click") ;
+	});
+</script>
+</body>
+
+</html>

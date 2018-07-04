@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.UserInfoMapper1">
+
+	<resultMap type="UserInfo" id="usermap">
+		<id column="user_id" property="userId"></id>
+		<result column="user_name" property="userName"></result>
+		<result column="user_sex" property="userSex"></result>
+		<result column="user_phone" property="userPhone"></result>
+		<result column="user_pw" property="userPw"></result>
+		<result column="user_type" property="userType"></result> 
+	</resultMap>
+
+	<insert id="insertUserInfo" parameterType="UserInfo">
+		insert into userinfo(name) values(#{name})
+	</insert>
+	
+	<select id="getUserInfoList" parameterType="UserInfo" resultMap="usermap">
+		select * from user_info
+			<where>
+			<if test="userName != null and userName != ''">
+				<bind name="namePattern" value="'%' + _parameter.userName + '%'"></bind>
+				and user_name like #{namePattern}
+			</if>
+			<if test="userPhone != null and userPhone != ''">
+				<bind name="phonePattern" value="'%' + _parameter.userPhone + '%'"></bind>
+				and user_phone like #{phonePattern}
+			</if>
+		</where>
+		<if test="start != -1 and length != -1">
+			limit #{start},#{length}
+		</if>
+	</select>
+	
+	<select id="getUserInfoCount" parameterType="UserInfo" resultType="long">
+		select count(*) from user_info
+		<where>
+			<if test="userName != null and userName != ''">
+				<bind name="namePattern" value="'%' + _parameter.userName + '%'"></bind>
+				and user_name like #{namePattern}
+			</if>
+			<if test="userPhone != null and userPhone != ''">
+				<bind name="phonePattern" value="'%' + _parameter.userPhone + '%'"></bind>
+				and user_phone like #{phonePattern}
+			</if>
+		</where>
+	</select>
+	
+</mapper>

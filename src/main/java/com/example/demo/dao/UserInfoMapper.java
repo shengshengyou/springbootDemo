@@ -10,5 +10,6 @@ public interface UserInfoMapper {
 	
 	@Insert(value ="insert into userinfo(name) values(#{name})")
 	public void insertUserInfo(User userInfo);
+	//add a comment
 }
 

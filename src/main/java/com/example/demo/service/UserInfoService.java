@@ -4,6 +4,9 @@ import com.example.demo.bean.User;
 import com.example.demo.bean.UserInfo;
 import com.example.demo.utils.PageBean;
 
+/*
+ * 用户管理的核心业务接口
+ */
 public interface UserInfoService {
 	public void insertUserInfo(User userInfo);
 	public void insertUserInfo1(User userInfo);

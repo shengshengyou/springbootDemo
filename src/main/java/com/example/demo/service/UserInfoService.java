@@ -1,5 +1,10 @@
 package com.example.demo.service;
 
+import java.io.File;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.example.demo.bean.User;
 import com.example.demo.bean.UserInfo;
 import com.example.demo.utils.PageBean;
@@ -23,4 +28,14 @@ public interface UserInfoService {
 	 * @return
 	 */
 	public Long getUserInfoCount(UserInfo userInfo);
+	
+	/*
+	 * 解析文件，批量添加用户
+	 */
+	public void addUsers(MultipartFile users) throws Exception;
+	
+	/*
+	 * 生成带下载的excel文件
+	 */
+	public File createDownloadFile(List<UserInfo> users) throws Exception;
 }

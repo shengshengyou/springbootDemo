@@ -32,6 +32,11 @@
 		</if>
 	</select>
 	
+	<insert id="addUserInfo" parameterType="UserInfo">
+		insert into user_info(user_name,user_sex,user_phone,user_pw,user_type) 
+		values(#{userName},#{userSex},#{userPhone},#{userPw},#{userType})
+	</insert>
+	
 	<select id="getUserInfoCount" parameterType="UserInfo" resultType="long">
 		select count(*) from user_info
 		<where>

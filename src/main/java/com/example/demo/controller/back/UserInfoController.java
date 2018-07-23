@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.junit.validator.PublicClassValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.bean.UserInfo;
@@ -86,5 +88,92 @@ public class UserInfoController {
 			e.printStackTrace();
 		}
 		return "";
+	}
+	
+	/*
+	 * 加载添加用户的页面
+	 */
+	@RequestMapping("loadadd")
+	public String loadAdd() {
+		return "back/userinfo/userinfo_add";
+	}
+	
+	@RequestMapping("add")
+	public String add(UserInfo userInfo,Model model){
+		try {
+			userInfoService.addUserInfo(userInfo);
+			model.addAttribute("result", "添加用户成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("result", "添加用户失败");
+		}
+		return "back/userinfo/userinfo_info";
+	}
+	
+	/**
+	 * 验证用户账号唯一
+	 * @param userInfo
+	 * @return
+	 */
+	@RequestMapping("validatephone")
+	@ResponseBody
+	public String validatePhone(UserInfo userInfo){
+		boolean flag = userInfoService.validatePhone(userInfo);
+		if(flag){
+			return "ok";
+		}else{
+			return "not ok";
+		}
+	}
+	
+	/**
+	 * 加载待修改的用户信息
+	 * @param userInfo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("loadupdate")
+	public String loadUpdate(UserInfo userInfo ,Model model){
+		UserInfo puser = userInfoService.loadUpdateUserInfo(userInfo);
+		model.addAttribute("userinfo", puser);
+		return "back/userinfo/userinfo_update";
+	}
+	
+	/**
+	 * 修改用户信息
+	 * @param userInfo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("update")
+	public String updateUserInfo(UserInfo userInfo,Model model){
+		try {
+			userInfoService.updateUserInfo(userInfo);
+			model.addAttribute("result", "修改用户信息成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("result", "修改用户信息失败");
+		}
+		return "back/userinfo/userinfo_info";
+	}
+	
+	/**
+	 * 删除用户信息
+	 * @param userInfo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("delete")
+	public String deleteUserInfo(UserInfo userInfo,Model model){
+		try {
+			userInfoService.deleteUserInfo(userInfo);
+			model.addAttribute("result", "删除用户信息成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("result", "删除用户信息失败");
+		}
+		return "back/userinfo/userinfo_info";
 	}
 }

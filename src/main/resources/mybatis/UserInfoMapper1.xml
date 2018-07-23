@@ -51,4 +51,44 @@
 		</where>
 	</select>
 	
+	<select id="getUserInfo" parameterType="UserInfo" resultMap="usermap">
+		select * from user_info
+		<where>
+			<if test="userId != null and userId != ''">
+				and user_id = #{userId}
+			</if>
+			<if test="userPhone != null and userPhone != ''">
+				and user_phone = #{userPhone}
+			</if>
+			<if test="userPw != null and userPw != ''">
+				and user_pw = #{userPw}
+			</if>
+		</where>
+	</select>
+	
+	<update id="updateUserInfo" parameterType="UserInfo">
+		update user_info
+		<set>
+			<if test="userName != null and userName != ''">
+				user_name = #{userName},
+			</if>
+			<if test="userSex != null and userSex != ''">
+				user_sex = #{userSex},
+			</if>
+			<if test="userPhone != null and userPhone != ''">
+				user_phone = #{userPhone},
+			</if>
+			<if test="userPw != null and userPw != ''">
+				user_pw = #{userPw},
+			</if>
+			<if test="userType != null and userType != ''">
+				user_type = #{userType},
+			</if>
+		</set>
+		where user_id = #{userId}
+	</update>
+	
+	<delete id="deleteUserInfo" parameterType="UserInfo">
+		delete from user_info where user_id = #{userId}
+	</delete>
 </mapper>

@@ -142,6 +142,34 @@ public class UserInfoServiceImpl implements UserInfoService {
 				book.close();
 				return file;
 	}
-	
-	
+
+	@Override
+	public void addUserInfo(UserInfo userInfo) throws Exception {
+		userInfoMapper1.addUserInfo(userInfo);
+	}
+
+	@Override
+	public boolean validatePhone(UserInfo userInfo) {
+		UserInfo puser = userInfoMapper1.getUserInfo(userInfo);
+		if(puser == null){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public UserInfo loadUpdateUserInfo(UserInfo userInfo) {
+		return userInfoMapper1.getUserInfo(userInfo);
+	}
+
+	@Override
+	public void updateUserInfo(UserInfo userInfo) throws Exception{
+		userInfoMapper1.updateUserInfo(userInfo);
+	}
+
+	@Override
+	public void deleteUserInfo(UserInfo userInfo) throws Exception {
+		userInfoMapper1.deleteUserInfo(userInfo);
+	}
+
 }

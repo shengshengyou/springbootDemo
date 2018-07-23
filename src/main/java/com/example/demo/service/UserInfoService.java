@@ -38,4 +38,29 @@ public interface UserInfoService {
 	 * 生成带下载的excel文件
 	 */
 	public File createDownloadFile(List<UserInfo> users) throws Exception;
+	
+	
+	/*
+	 * 添加用户信息
+	 */
+	public void addUserInfo(UserInfo userInfo) throws Exception;
+	
+	/*
+	 * 验证唯一性
+	 */
+	public boolean validatePhone(UserInfo userInfo);
+	/*
+	 * 加载用户信息更新页面
+	 */
+	public UserInfo loadUpdateUserInfo(UserInfo userInfo);
+	
+	/*
+	 * 更新用户信息
+	 */
+	public void updateUserInfo(UserInfo userInfo) throws Exception;
+	
+	/*
+	 * 删除用户信息
+	 */
+	public void deleteUserInfo(UserInfo userInfo) throws Exception;
 }

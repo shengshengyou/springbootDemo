@@ -35,5 +35,23 @@ public interface UserInfoMapper1 {
 	 * 添加用户
 	 */
 	public void addUserInfo(UserInfo userInfo);
+	
+	/**
+	 * 根据条件查询用户信息
+	 * @param userInfo
+	 */
+	public UserInfo getUserInfo(UserInfo userInfo);
+	
+	/**
+	 * 修改用户信息
+	 * @param userInfo
+	 */
+	public void updateUserInfo(UserInfo userInfo);
+	
+	/**
+	 * 删除用户信息
+	 * @param userInfo
+	 */
+	public void deleteUserInfo(UserInfo userInfo);
 }
 

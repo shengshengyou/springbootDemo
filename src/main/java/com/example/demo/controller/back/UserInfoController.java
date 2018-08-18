@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.junit.validator.PublicClassValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -99,6 +100,7 @@ public class UserInfoController {
 	}
 	
 	@RequestMapping("add")
+	@CacheEvict(cacheNames="zy",allEntries=true)
 	public String add(UserInfo userInfo,Model model){
 		try {
 			userInfoService.addUserInfo(userInfo);
@@ -116,6 +118,7 @@ public class UserInfoController {
 	 * @return
 	 */
 	@RequestMapping("validatephone")
+	@Cacheable(cacheNames="zy",key="#p0")
 	@ResponseBody
 	public String validatePhone(UserInfo userInfo){
 		boolean flag = userInfoService.validatePhone(userInfo);
@@ -133,6 +136,7 @@ public class UserInfoController {
 	 * @return
 	 */
 	@RequestMapping("loadupdate")
+	@Cacheable(cacheNames="zy",key="#p0")
 	public String loadUpdate(UserInfo userInfo ,Model model){
 		UserInfo puser = userInfoService.loadUpdateUserInfo(userInfo);
 		model.addAttribute("userinfo", puser);
@@ -146,6 +150,7 @@ public class UserInfoController {
 	 * @return
 	 */
 	@RequestMapping("update")
+	@CacheEvict(cacheNames="zy",allEntries=true)
 	public String updateUserInfo(UserInfo userInfo,Model model){
 		try {
 			userInfoService.updateUserInfo(userInfo);
@@ -165,6 +170,7 @@ public class UserInfoController {
 	 * @return
 	 */
 	@RequestMapping("delete")
+	@CacheEvict(cacheNames="zy",allEntries=true)
 	public String deleteUserInfo(UserInfo userInfo,Model model){
 		try {
 			userInfoService.deleteUserInfo(userInfo);

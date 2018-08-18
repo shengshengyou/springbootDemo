@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,6 +45,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 		userInfoMapper1.insertUserInfo(userInfo);
 	}
 
+	@Cacheable(cacheNames="zy",key="#p1")
 	@Override
 	public PageBean<UserInfo> getUserInfoList(UserInfo userInfo, Integer page) {
 		int allRow = getUserInfoCount(userInfo).intValue();//总记录数

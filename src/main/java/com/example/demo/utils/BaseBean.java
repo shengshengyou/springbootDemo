@@ -1,7 +1,8 @@
 package com.example.demo.utils;
 
+import java.io.Serializable;
 
-public class BaseBean {
+public class BaseBean implements Serializable{
 
 	private Integer start;
 	private Integer length;

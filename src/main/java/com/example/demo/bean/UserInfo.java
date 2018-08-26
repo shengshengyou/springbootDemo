@@ -10,7 +10,7 @@ import com.example.demo.utils.BaseBean;
  * 
  *
  */
-public class UserInfo  extends BaseBean{
+public class UserInfo  extends BaseBean implements Serializable{
 	
 	private Integer userId;
 	

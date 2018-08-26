@@ -1,5 +1,6 @@
 package com.example.demo.utils;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * @param <T>
  *
  */
-public class PageBean<T> {
+public class PageBean<T> implements Serializable{
 	
 	/**
 	 * 要返回的某一页的记录集合
